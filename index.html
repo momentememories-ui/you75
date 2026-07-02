@@ -89,16 +89,17 @@
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            // ปรับ Scale ให้เหมาะสมและสมมาตรมากขึ้นทั้งแนวตั้งและแนวนอน
-            let scale = Math.min(canvas.width / 40, canvas.height / 45); 
+            // [จุดแก้ไข #1] ปรับ Scale ให้เหมาะสมกับหน้าจอมือถือและขนาดตัวอักษร
+            let scale = Math.min(canvas.width / 40, canvas.height / 50); 
 
             for (let i = 0; i < 60; i++) {
                 let angle = t + i * 0.2; 
                 let pos = heartFunction(angle);
 
-                // ปรับ Offset ตัว Y ลงมานิดหน่อย (+ pos.y * scale) + (scale * 2) เพื่อชดเชยตูดหัวใจที่ยาวกว่าด้านบน
+                // [จุดแก้ไข #2] ปรับ Offset ตัว Y ลงมาด้านล่างมากขึ้น เพื่อชดเชยจุดศูนย์กลางของสมการ
+                // โดยเปลี่ยนจาก scale * 1.5 เป็น scale * 2.5
                 let x = canvas.width / 2 + pos.x * scale;
-                let y = (canvas.height / 2) + pos.y * scale + (scale * 1.5);
+                let y = (canvas.height / 2) + pos.y * scale + (scale * 2.5);
 
                 ctx.fillText("เค้ารักเซน😾", x, y);
             }
